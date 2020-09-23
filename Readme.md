@@ -1,4 +1,4 @@
 # aka
 
-a.k.a url shortner
+a.k.a url shortener
 
