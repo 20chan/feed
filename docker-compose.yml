@@ -1,0 +1,49 @@
+version: "2"
+services:
+  aka-proxy:
+    container_name: aka-proxy
+    image: caddy
+    depends_on:
+      - aka-server
+      - aka-client
+    restart: always
+    volumes:
+      - ./proxy/Caddyfile:/etc/caddy/Caddyfile
+    ports:
+      - 7020:7020
+  aka-db:
+    container_name: aka-db
+    image: mongo:latest
+    ports:
+      - 27020:27017
+    volumes:
+      - ./mongo:/data/db
+  aka-server:
+    build: ./server
+    container_name: aka-server
+    ports:
+      - 7021:7021
+    volumes:
+      - ./server/app:/app
+      - ./config:/app/config
+    environment:
+      PORT: 7021
+      MONGO_ADDR: "aka-db:27017"
+      ACCOUNTS_PATH: "/app/config/accounts.json"
+      AUTH_EXPIRES: 3600
+    env_file:
+      - ./config/jwt-secret
+    depends_on:
+      - aka-db
+    links:
+      - aka-db
+  aka-client:
+    build: ./client
+    container_name: aka-client
+    ports:
+      - 7022:7022
+    volumes:
+      - ./client/app:/app
+    stdin_open: true
+    environment:
+      PORT: 7022

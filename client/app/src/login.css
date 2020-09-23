@@ -1,0 +1,76 @@
+body {
+    margin: 0;
+    background-color: #282c34;
+}
+
+body * {
+    font-family: 'Iosevka SS04 Web';
+}
+
+.login-page {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -70%);
+    width: 90vw;
+    max-width: 360px;
+    min-width: 200px;
+}
+
+.title {
+    color: #e06c75;
+    margin-bottom: 30px;
+    font-size: 50px;
+    text-align: center;
+}
+
+.form {
+    position: relative;
+    /* background: #ffffff; */
+    text-align: center;
+    padding: 10px;
+}
+
+form {
+    margin: 0;    
+}
+
+.borderless {
+    width: 100%;
+    outline: 0;
+    border: 0;
+    padding: 15px;
+}
+
+.form .fields {
+    margin: 0 0 10px;
+}
+
+@import "https://0ch.me/resources/fonts/iosevka-ss04/webfont.css";
+
+.form input {
+    background-color: #f2f2f2;
+    margin: 0 0 4px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+.form button {
+    font-size: 1em;
+    text-transform: uppercase;
+    background-color: #4caf50;
+    color: #ffffff;
+    cursor: pointer;
+}
+.form button:hover, .form button:active, .form button:focus {
+    background-color: #43a047;
+}
+
+.unselectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}

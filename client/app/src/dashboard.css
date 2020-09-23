@@ -1,0 +1,124 @@
+@import "https://0ch.me/resources/fonts/iosevka-ss04/webfont.css";
+
+body {
+    margin: 0;
+    background-color: #282c34;
+}
+
+.loading em {
+    color: #ffffff;
+}
+
+.content {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -60%);
+    width: 90vw;
+    max-width: 600px;
+    min-width: 200px;
+}
+
+.content * {
+    font-family: 'Iosevka SS04 Web';
+}
+
+.search {
+    text-align: center;
+    height: 47px;
+}
+
+.search input {
+    width: 90%;
+    outline: 0;
+    border: 0;
+    padding: 1em;
+    background-color: #383a42;
+    color: #fafafa;
+    position: absolute;
+    transform: translate(-50%, 0);
+}
+
+.records {
+    margin-top: 40px;
+    display: grid;
+    column-gap: 0px;
+    row-gap: 0px;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+}
+
+.record_item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.record_item_content {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.record_icon {
+	height: 64px;
+	margin-right: 0.4em;
+    padding-top: 15px;
+    font-size: 40px;
+    color: #fafafa;
+}
+
+.record_text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.record_text a {
+	font-size: 1em;
+	font-weight: 500;
+    text-transform: uppercase;
+    color: #dcdfe4;
+}
+
+.record_text span {
+	color: var(--color-text-acc);
+    font-size: 0.8em;
+    color: #888888;
+}
+
+.record_text span.alive {
+    color: #98c379;
+}
+
+.record_text span.dead {
+    color: #e06c75;
+}
+
+.content button {
+    background-color: transparent;
+    color: #dcdfe4;
+    padding: 10px;
+    border-width: 0px 0px 5px 0px;
+    border-color: #e5c07b;
+    border-style: solid;
+    font-size: 0.8em;
+}
+
+.content button:hover {
+    background-color: #e5c07b;
+    outline: 0;
+}
+
+.content button:focus {
+    outline: 0;
+}
+
+.content-footer {
+    margin-top: 50px;
+}
+
+.action-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

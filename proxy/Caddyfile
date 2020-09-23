@@ -1,0 +1,4 @@
+http://localhost:7020
+
+reverse_proxy aka-client:7022
+reverse_proxy /api/* aka-server:7021
