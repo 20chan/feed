@@ -74,4 +74,16 @@ routes.put("/alias/:id", async (req, resp) => {
     }
 });
 
+routes.delete("/alias/:id", async (req, resp) => {
+    const id = req.params.id;
+    const collection = getAliases();
+    try {
+        await collection.deleteOne({"_id": new mongo.ObjectID(id)});
+        resp.send({"error": false});
+    } catch {
+        resp.status(404);
+        resp.send({"error": true});
+    }
+});
+
 export { routes };
