@@ -33,9 +33,9 @@ export const AliasForm = (props: Props) => {
 
     return (
         <div className="alias-form">
-            <input className={error ? "invalid" : ""} ref={aliasText} value={alias} onChange={e => setAlias(e.currentTarget.value)} placeholder="alias" />
-            <input ref={urlText} value={url} onKeyDown={onUrlKeyDown} onChange={e => setUrl(e.currentTarget.value)} placeholder="url" />
-            <button onClick={ev => submit()}>Create</button>
+            <input className={error ? "invalid" : ""} ref={aliasText} value={alias} onChange={e => setAlias(e.currentTarget.value)} placeholder="alias" spellCheck="false" />
+            <input ref={urlText} value={url} onKeyDown={onUrlKeyDown} onChange={e => setUrl(e.currentTarget.value)} placeholder="url" spellCheck="false" />
+            {/* <button onClick={ev => submit()}>Create</button> */}
         </div>
     );
 };

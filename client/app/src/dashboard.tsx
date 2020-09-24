@@ -108,14 +108,16 @@ const DashboardPage: React.SFC<RouteComponentProps> = ({ history }) => {
                     <div className="alias-list">
                         {
                             aliases.map(alias =>
-                                <div className="alias_item" key={alias.id}>
-                                    <div className="alias_id">{alias.id}</div>
-                                    <div className="alias_alias">
-                                        <a href={`/${alias.alias}`}>{alias.alias}</a>
-                                        <button onClick={() => navigator.clipboard.writeText(window.location.protocol + "//" + window.location.host + `/${alias.alias}`)}>Copy</button>
+                                <div className="alias-item" key={alias.id}>
+                                    <div className="alias-id">{alias.id}</div>
+                                    <button className="alias-delete" onClick={() => deleteAlias(alias.id)}>X</button>
+                                    <div className="item-content">
+                                        <div className="alias-alias">
+                                            <a href={`/${alias.alias}`}>{alias.alias}</a>
+                                        </div>
+                                        <div className="alias-url">{alias.url}</div>
+                                        <button className="alias-copy" onClick={() => navigator.clipboard.writeText(`${window.location.origin}/${alias.alias}`)}>Copy</button>
                                     </div>
-                                    <div className="alias_url">{alias.url}</div>
-                                    <button className="alias_delete" onClick={() => deleteAlias(alias.id)}>X</button>
                                 </div>)
                         }
                     </div>
