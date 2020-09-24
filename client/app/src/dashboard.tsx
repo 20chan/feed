@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { Alias } from "./entities";
 import "./dashboard.css";
+import { AliasForm } from "./components/aliasForm";
 
 const DashboardPage: React.SFC<RouteComponentProps> = ({ history }) => {
     const [auth, setAuth] = useState<boolean>(false);
@@ -33,7 +34,27 @@ const DashboardPage: React.SFC<RouteComponentProps> = ({ history }) => {
         });
         if (resp.ok) {
             await fetchData();
+            return true;
         }
+        return false;
+    };
+
+    const submitAlias = (alias: string, url: string) => {
+        return addAlias({ alias, url });
+    };
+
+    const deleteAlias = async (id?: string) => {
+        const resp = await fetch(`/api/aka/alias/${id}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+        if (resp.ok) {
+            await fetchData();
+            return true;
+        }
+        return false;
     };
 
     const logout = async (e: React.FormEvent<HTMLButtonElement>) => {
@@ -63,13 +84,15 @@ const DashboardPage: React.SFC<RouteComponentProps> = ({ history }) => {
                     </div>
                 </div>
                 <div className="content-body">
-                    <div>
+                    <AliasForm onSubmit={submitAlias} />
+                    <div className="alias-list">
                         {
                             aliases.map(alias =>
                                 <div className="alias_item" key={alias.id}>
                                     <div className="alias_id">{alias.id}</div>
                                     <div className="alias_alias">{alias.alias}</div>
                                     <div className="alias_url">{alias.url}</div>
+                                    <button className="alias_delete" onClick={() => deleteAlias(alias.id)}>X</button>
                                 </div>)
                         }
                     </div>
