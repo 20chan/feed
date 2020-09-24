@@ -1,25 +1,8 @@
 import * as express from "express";
 import * as mongo from "mongodb";
-import { DB } from "../db";
+import { Alias, getAliases, isValidUrl, mapMongoItem } from "../alias";
 
 const routes = express.Router();
-
-interface Alias {
-    id?: string;
-    url: string;
-    alias: string;
-}
-
-const getAliases = () => {
-    return DB.client.db('aka').collection('aliases');
-};
-
-const mapMongoItem = <T>(item: any): T => {
-    return {
-        id: item._id,
-        ...item,
-    };
-};
 
 routes.get("/alias", (req, resp) => {
     const collection = getAliases();
@@ -51,6 +34,11 @@ routes.post("/alias", async (req, resp) => {
         const item: Alias = {
             ...req.body,
         };
+        if (!isValidUrl(item.url)) {
+            resp.status(400);
+            resp.send({"error": true});
+            return;
+        }
         await collection.insertOne(item);
         resp.send({"error": false});
     } catch {
@@ -66,6 +54,11 @@ routes.put("/alias/:id", async (req, resp) => {
         const item: Alias = {
             ...req.body,
         };
+        if (!isValidUrl(item.url)) {
+            resp.status(400);
+            resp.send({"error": true});
+            return;
+        }
         await collection.updateOne({"_id": new mongo.ObjectID(id)}, item);
         resp.send({"error": false});
     } catch {
