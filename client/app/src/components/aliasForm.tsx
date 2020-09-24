@@ -11,15 +11,11 @@ export const AliasForm = (props: Props) => {
     const [alias, setAlias] = React.useState<string>("");
     const [url, setUrl] = React.useState<string>("");
 
-    React.useEffect(() => {
-        urlText.current?.addEventListener("keypress", ev => {
-            if (ev.key === "Enter") {
-                ev.preventDefault();
-                ev.stopPropagation();
-                submit();
-            }
-        });
-    }, [urlText]);
+    const onUrlKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === "Enter") {
+            submit();
+        }
+    };
 
     const clear = () => {
         setUrl("");
@@ -38,7 +34,7 @@ export const AliasForm = (props: Props) => {
     return (
         <div className="alias-form">
             <input className={error ? "invalid" : ""} ref={aliasText} value={alias} onChange={e => setAlias(e.currentTarget.value)} placeholder="alias" />
-            <input ref={urlText} value={url} onChange={e => setUrl(e.currentTarget.value)} placeholder="url" />
+            <input ref={urlText} value={url} onKeyDown={onUrlKeyDown} onChange={e => setUrl(e.currentTarget.value)} placeholder="url" />
             <button onClick={ev => submit()}>Create</button>
         </div>
     );

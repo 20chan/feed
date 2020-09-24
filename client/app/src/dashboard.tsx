@@ -39,8 +39,28 @@ const DashboardPage: React.SFC<RouteComponentProps> = ({ history }) => {
         return false;
     };
 
+    const updateAlias = async (id: string | undefined, alias: Alias) => {
+        const resp = await fetch(`/api/aka/alias/${id}`, {
+            method: "PUT",
+            body: JSON.stringify(alias),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+        if (resp.ok) {
+            await fetchData();
+            return true;
+        }
+        return false;
+    };
+
     const submitAlias = (alias: string, url: string) => {
-        return addAlias({ alias, url });
+        const exists = aliases.find(a => a.alias === alias);
+        if (exists === undefined) {
+            return addAlias({ alias, url });
+        } else {
+            return updateAlias(exists.id, { alias, url });
+        }
     };
 
     const deleteAlias = async (id?: string) => {

@@ -51,17 +51,18 @@ routes.put("/alias/:id", async (req, resp) => {
     const id = req.params.id;
     const collection = getAliases();
     try {
-        const item: Alias = {
-            ...req.body,
+        const item = {
+            "alias": req.body.alias,
+            "url": req.body.url,
         };
         if (!isValidUrl(item.url)) {
             resp.status(400);
             resp.send({"error": true});
             return;
         }
-        await collection.updateOne({"_id": new mongo.ObjectID(id)}, item);
+        await collection.updateOne({"_id": new mongo.ObjectID(id)}, { $set: item });
         resp.send({"error": false});
-    } catch {
+    } catch (ex) {
         resp.status(404);
         resp.send({"error": true});
     }
