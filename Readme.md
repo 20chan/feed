@@ -1,6 +1,3 @@
-# aka
+# ene
 
-aka, a.k.a url shortener with admin login
-
-![screenshot](/imgs/screenshot.png)
-
+ene, for me
