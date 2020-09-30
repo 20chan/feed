@@ -38,7 +38,9 @@ services:
     links:
       - ene-db
   ene-client:
-    build: ./client
+    build:
+      context: ./client
+      dockerfile: ${CLIENT_DOCKERFILE}
     container_name: ene-client
     ports:
       - 7062:7062
