@@ -1,49 +1,50 @@
 version: "2"
 services:
-  aka-proxy:
-    container_name: aka-proxy
+  ene-proxy:
+    container_name: ene-proxy
     image: caddy
     depends_on:
-      - aka-server
-      - aka-client
+      - ene-server
+      - ene-client
     restart: always
     volumes:
       - ./proxy/Caddyfile:/etc/caddy/Caddyfile
     ports:
-      - 7020:7020
-  aka-db:
-    container_name: aka-db
+      - 7060:7060
+  ene-db:
+    container_name: ene-db
     image: mongo:latest
     ports:
-      - 27020:27017
+      - 27022:27017
     volumes:
       - ./mongo:/data/db
-  aka-server:
+  ene-server:
     build: ./server
-    container_name: aka-server
+    container_name: ene-server
     ports:
-      - 7021:7021
+      - 7061:7061
     volumes:
       - ./server/app:/app
       - ./config:/app/config
     environment:
-      PORT: 7021
-      MONGO_ADDR: "aka-db:27017"
+      PORT: 7061
+      MONGO_ADDR: "ene-db:27017"
       ACCOUNTS_PATH: "/app/config/accounts.json"
       AUTH_EXPIRES: 3600
     env_file:
       - ./config/jwt-secret
     depends_on:
-      - aka-db
+      - ene-db
     links:
-      - aka-db
-  aka-client:
+      - ene-db
+  ene-client:
     build: ./client
-    container_name: aka-client
+    container_name: ene-client
     ports:
-      - 7022:7022
+      - 7062:7062
     volumes:
       - ./client/app:/app
+      - ./client/app/nginx.conf:/etc/nginx/conf.d/default.conf
     stdin_open: true
     environment:
-      PORT: 7022
+      PORT: 7062

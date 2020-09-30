@@ -5,7 +5,7 @@ import DashboardPage from "./dashboard";
 
 function App() {
     return (
-        <Router basename="/admin">
+        <Router>
             <Switch>
                 <Route exact path="/"><DashboardPage /></Route>
                 <Route exact path="/login"><LoginPage /></Route>

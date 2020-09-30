@@ -1,6 +1,4 @@
-http://localhost:7020
+http://localhost:7060
 
-redir / /admin/
-redir /admin /admin/
-reverse_proxy /admin/* aka-client:7022
-reverse_proxy aka-server:7021
+reverse_proxy ene-client:7062
+reverse_proxy /api/* ene-server:7061

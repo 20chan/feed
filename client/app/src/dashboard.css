@@ -23,11 +23,7 @@ body {
     font-family: 'Iosevka SS04 Web';
 }
 
-.alias-form {
-    text-align: center;
-}
-
-.alias-form input {
+.content input {
     width: 90%;
     outline: 0;
     border: 0;
@@ -35,74 +31,6 @@ body {
     background-color: #383a42;
     color: #fafafa;
 }
-
-.alias-form button {
-    width: 80%
-}
-
-.alias-list {
-    margin-top: 40px;
-    display: block;
-}
-
-.alias-item {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    margin-bottom: 1em;
-}
-
-.alias-item .alias-id {
-    height: 1em;
-    font-size: .8em;
-    color: #888888
-}
-
-.alias-item .alias-delete {
-    position: absolute;
-    top: 0em;
-    right: 0;
-    border: none;
-    color: #e06c75;
-}
-
-.alias-item .alias-delete:hover {
-    color: #e5c07b;
-}
-
-.alias-item .item-content {
-    position: relative;
-    margin-top: .1em;
-    flex-grow: 2;
-}
-
-.alias-item .alias-alias {
-	font-size: 1em;
-    color: #dcdfe4;
-    display: inline-block;
-    width: 30%;
-}
-
-.alias-item .alias-alias a:any-link {
-    color: #dcdfe4;
-    text-decoration: none;
-}
-
-.alias-item .alias-url {
-    display: inline-block;
-    width: calc(70% - 40px);
-    color: #98c379;
-}
-
-.alias-item .alias-copy {
-    width: 40px;
-    font-size: 0;
-}
-
-.alias-item .alias-copy:hover {
-    background-color: #e5c07b;
-}
-
 
 .content button {
     background-color: transparent;
@@ -118,15 +46,3 @@ body {
 .content button:focus {
     outline: 0;
 }
-/*
-
-.content-footer {
-    margin-top: 50px;
-}
-
-.action-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-*/

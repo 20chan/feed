@@ -2,8 +2,7 @@ import express from "express";
 import * as bodyParser from "body-parser";
 import * as cookieParser from "cookie-parser";
 import { Auth } from "./routes/auth";
-import * as aka from "./routes/aka";
-import * as redirects from "./routes/redirects";
+import * as ene from "./routes/ene";
 import { DB } from "./db";
 import { Account } from "./accounts";
 import { errorMiddleware } from "./middlewares/error";
@@ -26,8 +25,7 @@ app.get("/api/health", (req, res) => {
 const auth = new Auth(AUTH_EXPIRES, AUTH_SECRET);
 
 app.use("/api/auth", auth.router);
-app.use("/api/aka", auth.auth, aka.routes);
-app.use("/", redirects.routes);
+app.use("/api/ene", auth.auth, ene.routes);
 
 app.use(errorMiddleware);
 

@@ -4,6 +4,10 @@ import { Alias, getAliases, isValidUrl, mapMongoItem } from "../alias";
 
 const routes = express.Router();
 
+routes.get("/health", (req, resp) => {
+    resp.send("healthcheck");
+});
+
 routes.get("/alias", (req, resp) => {
     const collection = getAliases();
     collection.find().toArray((err, items) => {
