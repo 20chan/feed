@@ -1,0 +1,32 @@
+.calendar {
+    background-color: #1d2026;
+    padding: 45px;
+    border-radius: 5px;
+}
+
+.calendar .calendar-title {
+    text-align: center;
+    color: var(--dark-yellow);
+    margin: 0px 0px 30px;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.calendar .calendar-container {
+    display: grid;
+    column-gap: 0;
+    grid-template-columns: repeat(7, 1fr);
+    align-items: center;
+    align-content: center;
+}
+
+.calendar .weekday-wrapper {
+    display: inline-block;
+    text-align: center;
+    margin: 8px;
+}
+
+.calendar .weekday {
+    text-align: center;
+    color: var(--light-black);
+}
