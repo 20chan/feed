@@ -2,6 +2,8 @@
     background-color: #1d2026;
     padding: 45px;
     border-radius: 5px;
+    margin: auto;
+    width: 300px;
 }
 
 .calendar .calendar-title {
