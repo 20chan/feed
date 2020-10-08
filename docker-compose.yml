@@ -1,52 +1,52 @@
 version: "2"
 services:
-  ene-proxy:
-    container_name: ene-proxy
+  feed-proxy:
+    container_name: feed-proxy
     image: caddy
     depends_on:
-      - ene-server
-      - ene-client
+      - feed-server
+      - feed-client
     restart: always
     volumes:
       - ./proxy/Caddyfile:/etc/caddy/Caddyfile
     ports:
-      - 7060:7060
-  ene-db:
-    container_name: ene-db
+      - 7120:7120
+  feed-db:
+    container_name: feed-db
     image: mongo:latest
     ports:
-      - 27022:27017
+      - 27025:27017
     volumes:
       - ./mongo:/data/db
-  ene-server:
+  feed-server:
     build: ./server
-    container_name: ene-server
+    container_name: feed-server
     ports:
-      - 7061:7061
+      - 7121:7121
     volumes:
       - ./server/app:/app
       - ./config:/app/config
     environment:
-      PORT: 7061
-      MONGO_ADDR: "ene-db:27017"
+      PORT: 7121
+      MONGO_ADDR: "feed-db:27017"
       ACCOUNTS_PATH: "/app/config/accounts.json"
       AUTH_EXPIRES: 3600
     env_file:
       - ./config/jwt-secret
     depends_on:
-      - ene-db
+      - feed-db
     links:
-      - ene-db
-  ene-client:
+      - feed-db
+  feed-client:
     build:
       context: ./client
       dockerfile: ${CLIENT_DOCKERFILE}
-    container_name: ene-client
+    container_name: feed-client
     ports:
-      - 7062:7062
+      - 7122:7122
     volumes:
       - ./client/app:/app
       - ./client/app/nginx.conf:/etc/nginx/conf.d/default.conf
     stdin_open: true
     environment:
-      PORT: 7062
+      PORT: 7122

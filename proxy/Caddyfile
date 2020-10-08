@@ -1,4 +1,4 @@
-http://localhost:7060
+http://localhost:7120
 
-reverse_proxy ene-client:7062
-reverse_proxy /api/* ene-server:7061
+reverse_proxy feed-client:7122
+reverse_proxy /api/* feed-server:7121
