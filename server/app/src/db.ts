@@ -21,3 +21,11 @@ export class DB {
         this.client.close();
     }
 }
+
+export const mapMongoItem = <T>(item: any): T => {
+    return {
+        id: item._id,
+        ...item,
+        _id: undefined,
+    };
+};
