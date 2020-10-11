@@ -7,7 +7,6 @@ const DashboardPage: React.FunctionComponent<RouteComponentProps> = ({ history }
     const [auth, setAuth] = useState<boolean>(false);
 
     useEffect(() => {
-        document.title = "ene";
         fetchData().then(() => {
             setAuth(true);
         });
@@ -43,7 +42,7 @@ const DashboardPage: React.FunctionComponent<RouteComponentProps> = ({ history }
             <div className="content">
                 <div className="content-header">
                     <div className="title unselectable">
-                        ene.0ch.me
+                        feed.0ch.me
                     </div>
                 </div>
                 <div className="content-body">

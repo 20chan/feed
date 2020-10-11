@@ -6,10 +6,6 @@ const LoginPage: React.SFC<RouteComponentProps> = ({ history }) => {
     const [id, setId] = React.useState<string>("");
     const [password, setPassword] = React.useState<string>("");
 
-    React.useEffect(() => {
-        document.title = "ene";
-    }, []);
-
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const resp = await fetch("/api/auth/login", {
@@ -31,7 +27,7 @@ const LoginPage: React.SFC<RouteComponentProps> = ({ history }) => {
             <div className="form">
                 <form onSubmit={handleSubmit}>
                     <div className="title">
-                        <div className="unselectable">ene.0ch.me</div>
+                        <div className="unselectable">feed.0ch.me</div>
                     </div>
                     <div className="fields">
                         <input type="text" placeholder="username" className="borderless" value={id} onChange={event => setId(event.target.value)} required />
