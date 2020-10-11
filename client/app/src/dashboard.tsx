@@ -13,7 +13,7 @@ const DashboardPage: React.FunctionComponent<RouteComponentProps> = ({ history }
     }, []);
 
     const fetchData = async () => {
-        const authResp = await fetch("/api/ene/health");
+        const authResp = await fetch("/api/feed/health");
         if (!authResp.ok) {
             history.push("/login");
         }
