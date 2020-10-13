@@ -29,14 +29,17 @@ services:
     environment:
       PORT: 7121
       MONGO_ADDR: "feed-db:27017"
+      RIVER_ADDR: "feed-river:7130"
       ACCOUNTS_PATH: "/app/config/accounts.json"
       AUTH_EXPIRES: 3600
     env_file:
       - ./config/jwt-secret
     depends_on:
       - feed-db
+      - feed-river
     links:
       - feed-db
+      - feed-river
   feed-client:
     build:
       context: ./client
@@ -50,3 +53,10 @@ services:
     stdin_open: true
     environment:
       PORT: 7122
+  feed-river:
+    build: ../river
+    container_name: feed-river
+    ports:
+      - 7130:7130
+    environment:
+      PORT: 7130

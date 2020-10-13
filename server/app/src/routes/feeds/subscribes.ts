@@ -10,7 +10,7 @@ route.get("/", async (req, resp) => {
     } catch (err) {
         resp.status(500);
         resp.end();
-        console.error("error on subscribes.get /", err);
+        console.error("error on feeds.subscribes.get /", err);
     }
 });
 
