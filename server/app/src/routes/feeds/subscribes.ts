@@ -1,5 +1,5 @@
 import * as express from "express";
-import * as db from "../subscribes";
+import * as db from "../../subscribes";
 
 const route = express.Router();
 
