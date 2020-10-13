@@ -18,9 +18,14 @@ route.get("/:id", async (req, resp) => {
     const id = req.params.id;
     try {
         const item = db.getSubscribe(id);
-        resp.json(db.mapMongo(item));
+        if (item === null) {
+            resp.status(404);
+            resp.end();
+        } else {
+            resp.json(db.mapMongo(item));
+        }
     } catch {
-        resp.status(404);
+        resp.status(400);
         resp.end();
     }
 });
