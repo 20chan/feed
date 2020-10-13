@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
-import { Calendar } from "./components/calendar";
 import "./dashboard.css";
 
 const DashboardPage: React.FunctionComponent<RouteComponentProps> = ({ history }) => {
@@ -46,9 +45,6 @@ const DashboardPage: React.FunctionComponent<RouteComponentProps> = ({ history }
                     </div>
                 </div>
                 <div className="content-body">
-                    <section>
-                        <Calendar />
-                    </section>
                 </div>
             </div>
         </div>
