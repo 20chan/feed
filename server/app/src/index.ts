@@ -2,6 +2,7 @@ import express from "express";
 import * as bodyParser from "body-parser";
 import * as cookieParser from "cookie-parser";
 import { Auth } from "./routes/auth";
+import { route as subscribes } from "./routes/subscribes";
 import { DB } from "./db";
 import { Account } from "./accounts";
 import { errorMiddleware } from "./middlewares/error";
@@ -24,6 +25,7 @@ app.get("/api/health", (req, res) => {
 const auth = new Auth(AUTH_EXPIRES, AUTH_SECRET);
 
 app.use("/api/auth", auth.router);
+app.use("/api/feed/subscribes", auth.auth, subscribes);
 
 app.use(errorMiddleware);
 
