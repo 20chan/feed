@@ -29,7 +29,7 @@ services:
     environment:
       PORT: 7121
       MONGO_ADDR: "feed-db:27017"
-      RIVER_ADDR: "feed-river:7130"
+      RIVER_ADDR: "http://feed-river:7130"
       ACCOUNTS_PATH: "/app/config/accounts.json"
       AUTH_EXPIRES: 3600
     env_file:
