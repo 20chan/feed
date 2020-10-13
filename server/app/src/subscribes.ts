@@ -1,23 +1,17 @@
 import * as mongo from "mongodb";
 import { DB, mapMongoItem } from "./db";
-
-export interface ISubscribe {
-    id?: string;
-    type: string;
-    url: string;
-    guid: string;
-}
+import { ISubscribe } from "./entities";
 
 const getSubscribes = () => {
-    return DB.client.db("feed").collection("subscribes");
+    return DB.client.db("feed").collection<ISubscribe>("subscribes");
 };
 
 export const getAllSubscribes = () => {
-    return getSubscribes().find<ISubscribe>().toArray();
+    return getSubscribes().find().toArray();
 };
 
 export const getSubscribe = (id: string) => {
-    return getSubscribes().findOne<ISubscribe>({"_id": new mongo.ObjectID(id)}, );
+    return getSubscribes().findOne({"_id": new mongo.ObjectID(id)});
 };
 
 export const insertSubscribe = (item: ISubscribe) => {

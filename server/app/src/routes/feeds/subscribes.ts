@@ -1,5 +1,6 @@
 import * as express from "express";
 import * as db from "../../subscribes";
+import { ISubscribe } from "../../entities";
 
 const route = express.Router();
 
@@ -32,7 +33,7 @@ route.get("/:id", async (req, resp) => {
 
 route.post("/", async (req, resp) => {
     try {
-        const item: db.ISubscribe = {
+        const item: ISubscribe = {
             ...req.body,
         };
         // todo: check item is valid
