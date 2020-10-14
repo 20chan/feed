@@ -57,3 +57,7 @@ export const updateFeedItem = (item: FeedItem) => {
 export const deleteFeedItem = (_id: mongo.ObjectId) => {
     return getFeedItems().deleteOne({_id});
 };
+
+export const deleteAllFeedItemsInChannel = (channel: string) => {
+    return getFeedItems().deleteMany({"channel": channel});
+};

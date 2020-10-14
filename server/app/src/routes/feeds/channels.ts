@@ -60,6 +60,30 @@ route.get("/:id/items/:itemId", async (req, resp) => {
     }
 });
 
+route.delete("/:id/items/all", async (req, resp) => {
+    const id = req.params.id;
+    try {
+        await db.deleteAllFeedItemsInChannel(id);
+        resp.status(200);
+        resp.end();
+    } catch {
+        resp.status(400);
+        resp.end();
+    }
+});
+
+route.delete("/:id/items/:itemId", async (req, resp) => {
+    const itemId = req.params.itemId;
+    try {
+        await db.deleteFeedItem(new ObjectId(itemId));
+        resp.status(200);
+        resp.end();
+    } catch {
+        resp.status(400);
+        resp.end();
+    }
+});
+
 route.post("/:id/items/:itemId/read", async (req, resp) => {
     const itemId = req.params.itemId;
     try {
