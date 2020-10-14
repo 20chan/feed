@@ -24,6 +24,7 @@ export interface FeedItem extends IFeedItem {
     id?: string;
     channel: string;
     read: boolean;
+    updated: boolean;
 }
 
 export interface ISubscribe {

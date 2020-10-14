@@ -18,6 +18,10 @@ export const getFeedChannel = (id: string) => {
     return getFeedChannels().findOne({"_id": new mongo.ObjectID(id)});
 };
 
+export const findFeedChannel = (subscribe: string) => {
+    return getFeedChannels().findOne({"subscribe": subscribe});
+};
+
 export const insertFeedChannel = (item: FeedChannel) => {
     return getFeedChannels().insertOne(item);
 };
@@ -36,6 +40,10 @@ export const getAllFeedItems = (channel: string) => {
 
 export const getFeedItem = (id: string) => {
     return getFeedItems().findOne({"_id": new mongo.ObjectID(id)});
+};
+
+export const findFeedItem = (guid: string) => {
+    return getFeedItems().findOne({"guid": guid});
 };
 
 export const insertFeedItem = (item: FeedItem) => {
