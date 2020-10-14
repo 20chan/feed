@@ -31,5 +31,4 @@ export interface ISubscribe {
     id?: string;
     type: string;
     url: string;
-    guid: string;
 }
