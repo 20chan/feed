@@ -1,6 +1,6 @@
-import { FeedChannel, FeedItem, IFeedChannel, IFeedItem, ISubscribe } from "../entities";
-import { findFeedChannel, findFeedItem, insertFeedChannel, insertFeedItem, updateFeedChannel, updateFeedItem } from "../feed";
-import { fetchFeed } from "../river";
+import { FeedChannel, FeedItem, IFeedChannel, IFeedItem, ISubscribe } from "./entities";
+import { findFeedChannel, findFeedItem, insertFeedChannel, insertFeedItem, updateFeedChannel, updateFeedItem } from "./feed";
+import { fetchFeed } from "./river";
 
 const getUpdatedChannel = async (subscribe: string, feed: IFeedChannel): Promise<FeedChannel> => {
     const channel = await findFeedChannel(subscribe);

@@ -1,5 +1,5 @@
 import * as express from "express";
-import { fetchChannel } from "../../jobs/fetchFeeds";
+import { fetchChannel } from "../../fetchFeeds";
 import { getSubscribe } from "../../subscribes";
 
 const route = express.Router();
