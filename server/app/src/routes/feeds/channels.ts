@@ -18,7 +18,7 @@ route.get("/", async (req, resp) => {
 route.get("/:id", async (req, resp) => {
     const id = req.params.id;
     try {
-        const item = db.getFeedChannel(new ObjectId(id));
+        const item = await db.getFeedChannel(new ObjectId(id));
         if (item === null) {
             resp.status(404);
             resp.end();
@@ -35,7 +35,7 @@ route.get("/:id/items", async (req, resp) => {
     const id = req.params.id;
     try {
         const item = await db.getAllFeedItems(id);
-        resp.json(item.map);
+        resp.json(item);
     } catch (err) {
         resp.status(500);
         resp.end();
