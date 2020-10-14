@@ -60,7 +60,7 @@ const updateChannelItem = async (channel: string, feed: IFeedItem): Promise<Feed
     }
 };
 
-const fetchChannel = async (subscribe: ISubscribe) => {
+export const fetchChannel = async (subscribe: ISubscribe) => {
     const subsId = subscribe.id || "";
     const feed = await fetchFeed(subscribe.type, subscribe.url);
     if (feed === null) {
