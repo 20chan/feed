@@ -59,3 +59,5 @@ export const deleteFeedItem = (id: string) => {
 };
 
 export const mapMongoChannel = (item: any) => mapMongoItem<FeedChannel>(item);
+
+export const mapMongoFeedItem = (item: any) => mapMongoItem<FeedItem>(item);
