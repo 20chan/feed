@@ -1,5 +1,5 @@
 import * as mongo from "mongodb";
-import { DB, mapMongoItem } from "./db";
+import { DB } from "./db";
 import { IFeedChannel, IFeedItem, FeedChannel, FeedItem } from "./entities";
 
 const getFeedChannels = () => {
@@ -14,8 +14,8 @@ export const getAllFeedChannels = () => {
     return getFeedChannels().find().toArray();
 };
 
-export const getFeedChannel = (id: string) => {
-    return getFeedChannels().findOne({"_id": new mongo.ObjectID(id)});
+export const getFeedChannel = (_id: mongo.ObjectId) => {
+    return getFeedChannels().findOne({_id});
 };
 
 export const findFeedChannel = (subscribe: string) => {
@@ -27,19 +27,19 @@ export const insertFeedChannel = (item: FeedChannel) => {
 };
 
 export const updateFeedChannel = (item: FeedChannel) => {
-    return getFeedChannels().updateOne({"_id": new mongo.ObjectID(item.id)}, { $set: item });
+    return getFeedChannels().updateOne({"_id": item._id}, { $set: item });
 };
 
-export const deleteFeedChannel = (id: string) => {
-    return getFeedChannels().deleteOne({"_id": new mongo.ObjectID(id)});
+export const deleteFeedChannel = (_id: mongo.ObjectId) => {
+    return getFeedChannels().deleteOne({_id});
 };
 
 export const getAllFeedItems = (channel: string) => {
     return getFeedItems().find({"channel": channel}).toArray();
 };
 
-export const getFeedItem = (id: string) => {
-    return getFeedItems().findOne({"_id": new mongo.ObjectID(id)});
+export const getFeedItem = (_id: mongo.ObjectId) => {
+    return getFeedItems().findOne({_id});
 };
 
 export const findFeedItem = (guid: string) => {
@@ -51,13 +51,9 @@ export const insertFeedItem = (item: FeedItem) => {
 };
 
 export const updateFeedItem = (item: FeedItem) => {
-    return getFeedItems().updateOne({"_id": new mongo.ObjectID(item.id)}, { $set: item });
+    return getFeedItems().updateOne({"_id": item._id}, { $set: item });
 };
 
-export const deleteFeedItem = (id: string) => {
-    return getFeedItems().deleteOne({"_id": new mongo.ObjectID(id)});
+export const deleteFeedItem = (_id: mongo.ObjectId) => {
+    return getFeedItems().deleteOne({_id});
 };
-
-export const mapMongoChannel = (item: any) => mapMongoItem<FeedChannel>(item);
-
-export const mapMongoFeedItem = (item: any) => mapMongoItem<FeedItem>(item);

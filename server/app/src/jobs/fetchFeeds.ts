@@ -14,7 +14,7 @@ const getUpdatedChannel = async (subscribe: string, feed: IFeedChannel): Promise
         const insert = await insertFeedChannel(update);
         return {
             ...update,
-            id: insert.insertedId.toHexString(),
+            _id: insert.insertedId,
         };
     } else {
         const update: FeedChannel = {
@@ -42,7 +42,7 @@ const updateChannelItem = async (channel: string, feed: IFeedItem): Promise<Feed
         const insert = await insertFeedItem(update);
         return {
             ...update,
-            id: insert.insertedId.toHexString(),
+            _id: insert.insertedId,
         };
     } else {
         const changed = feed.title !== item.title || feed.description !== item.description || feed.link !== item.link;
@@ -61,13 +61,13 @@ const updateChannelItem = async (channel: string, feed: IFeedItem): Promise<Feed
 };
 
 export const fetchChannel = async (subscribe: ISubscribe) => {
-    const subsId = subscribe.id || "";
+    const subsId = subscribe._id?.toString() || "";
     const feed = await fetchFeed(subscribe.type, subscribe.url);
     if (feed === null) {
         throw new Error("fetch failed");
     }
     const channel = await getUpdatedChannel(subsId, feed);
     await Promise.all(feed.items.map(async (item) => {
-        await updateChannelItem(channel.id!, item);
+        await updateChannelItem(channel._id?.toString()!, item);
     }));
 };

@@ -1,3 +1,5 @@
+import { ObjectId } from "mongodb";
+
 export interface IFeedChannel {
     title: string;
     description: string;
@@ -13,7 +15,7 @@ export interface IFeedItem {
 }
 
 export interface FeedChannel {
-    id?: string;
+    _id?: ObjectId;
     subscribe: string;
     title: string;
     description: string;
@@ -21,14 +23,14 @@ export interface FeedChannel {
 }
 
 export interface FeedItem extends IFeedItem {
-    id?: string;
+    _id?: ObjectId;
     channel: string;
     read: boolean;
     updated: boolean;
 }
 
 export interface ISubscribe {
-    id?: string;
+    _id?: ObjectId;
     type: string;
     url: string;
 }

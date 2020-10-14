@@ -1,5 +1,5 @@
 import * as mongo from "mongodb";
-import { DB, mapMongoItem } from "./db";
+import { DB } from "./db";
 import { ISubscribe } from "./entities";
 
 const getSubscribes = () => {
@@ -19,11 +19,9 @@ export const insertSubscribe = (item: ISubscribe) => {
 };
 
 export const updateSubscribe = (item: ISubscribe) => {
-    return getSubscribes().updateOne({"_id": new mongo.ObjectID(item.id)}, { $set: item });
+    return getSubscribes().updateOne({"_id": item._id}, { $set: item });
 };
 
-export const deleteSubscribe = (id: string) => {
-    return getSubscribes().deleteOne({"_id": new mongo.ObjectID(id)});
+export const deleteSubscribe = (_id: mongo.ObjectID) => {
+    return getSubscribes().deleteOne({_id});
 };
-
-export const mapMongo = (item: any) => mapMongoItem<ISubscribe>(item);

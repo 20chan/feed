@@ -12,11 +12,13 @@ route.get("/:id", async (req, resp) => {
         resp.end();
         return;
     }
+    console.log(subscribe);
     try {
-        fetchChannel(subscribe);
+        await fetchChannel(subscribe);
         resp.end();
-    } catch {
-        resp.status(400);
+    } catch (err) {
+        console.error(`error on feeds.fetch.get /${id}`, err);
+        resp.status(500);
         resp.end();
     }
 });

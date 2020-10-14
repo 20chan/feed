@@ -16,7 +16,7 @@ export const getFeedTypes = async (): Promise<string[] | null> => {
 
 export const fetchFeed = async (type: string, url: string): Promise<IFeedChannel | null> => {
     try {
-        const resp = await fetch(`${FEEDS_URL}/${type}/${url}`);
+        const resp = await fetch(`${FEEDS_URL}/${type}?url=${url}`);
         return await resp.json();
     } catch {
         return null;
