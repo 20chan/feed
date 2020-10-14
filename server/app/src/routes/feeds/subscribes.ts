@@ -53,7 +53,7 @@ route.put("/:id", async (req, resp) => {
         // todo: check item is valid
         const item = {
             ...req.body,
-            id,
+            _id: new ObjectId(id),
         };
         await db.updateSubscribe(item);
         resp.status(200);
