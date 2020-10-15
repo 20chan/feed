@@ -1,6 +1,7 @@
 .channel-items {
     list-style-type: none;
     padding-inline-start: 0;
+    margin-block-end: 0;
 }
 
 .channel-section {
@@ -12,15 +13,30 @@
     text-decoration: none;
 }
 
+.channel-content {
+    position: relative;
+}
+
+.channel-header-corner {
+    position: absolute;
+    display: flex;
+    top: 5px;
+    right: 10px;
+}
+
+.channel-header-corner button {
+    padding: 0 5px 5px 5px;
+}
+
 .channel-item {
     margin: 1px;
-    padding: 3px 0 3px 0;
 }
 
 .channel-item-link {
     width: 100%;
     display: inline-block;
     z-index: 1;
+    padding: 8px 0 8px 0;
     position: relative;
 }
 
@@ -38,4 +54,19 @@
     color: var(--dark-white);
     text-decoration: underline;
     padding-left: 10px;
+}
+
+.channel-footer {
+    display: flex;
+}
+
+.channel-display-button {
+    width: 50%;
+    padding: 10px;
+}
+
+.channel-display-button:hover {
+    color: var(--dark-yellow);
+    font-weight: bold;
+    border-bottom: 1px solid var(--dark-yellow);
 }
