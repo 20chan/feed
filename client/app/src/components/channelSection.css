@@ -3,6 +3,10 @@
     padding-inline-start: 0;
 }
 
+.channel-section {
+    margin: 3px;
+}
+
 .channel-title {
     color: var(--dark-green);
     text-decoration: none;
@@ -15,6 +19,9 @@
 
 .channel-item-link {
     width: 100%;
+    display: inline-block;
+    z-index: 1;
+    position: relative;
 }
 
 .channel-item-link:any-link {
