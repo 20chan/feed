@@ -1,6 +1,7 @@
 export interface IFeedChannel {
     _id?: string;
     subscribe: string;
+    name: string;
     title: string;
     description: string;
     link: string;
@@ -25,4 +26,5 @@ export interface ISubscribe {
     _id?: string;
     type: string;
     url: string;
+    name: string;
 }
