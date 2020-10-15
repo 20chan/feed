@@ -13,7 +13,7 @@ export const ChannelSection = ({ channel }: { channel: FeedChannel}) => {
                 <ol className="channel-items">
                 {
                     channel.items.map((item, i) =>
-                    <li className="channel-item" key={i} style={{ display: (i < displayCount) ? "list-item" : "none2"}}>
+                    <li className="channel-item" key={i} style={{ display: (i < displayCount) ? "list-item" : "none"}}>
                         <a className="channel-item-link" href={item.link} target="_blank" rel="noopener">{item.title}</a>
                     </li>)
                 }
