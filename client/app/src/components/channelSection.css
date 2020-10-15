@@ -3,6 +3,11 @@
     padding-inline-start: 0;
 }
 
+.channel-title {
+    color: var(--dark-green);
+    text-decoration: none;
+}
+
 .channel-item {
     margin: 1px;
     padding: 3px 0 3px 0;

@@ -8,7 +8,7 @@ export const ChannelSection = ({ channel }: { channel: FeedChannel}) => {
         <section className="channel-section">
             <div className="channel-content">
                 <h1 className="channel-header">
-                    <a href={channel.link}>{channel.title}</a>
+                    <a className="channel-title" href={channel.link}>{channel.title}</a>
                 </h1>
                 <ol className="channel-items">
                 {
