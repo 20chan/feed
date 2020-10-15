@@ -1,0 +1,18 @@
+.channel-items {
+    list-style-type: none;
+}
+
+.channel-item-link:any-link {
+    transition: all .1s ease;
+    color: #b0b2b6;
+    text-decoration: none;
+}
+
+.channel-item-link:visited {
+    color: #696a6d
+}
+
+.channel-item-link:hover {
+    color: var(--dark-white);
+    text-decoration: underline;
+}

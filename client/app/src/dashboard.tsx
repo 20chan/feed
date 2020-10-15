@@ -65,7 +65,7 @@ const DashboardPage: React.FunctionComponent<RouteComponentProps> = ({ history }
                 <div className="content-body">
                     <div className="channels">
                         {
-                            channels.map(c => <ChannelSection channel={c} />)
+                            channels.map(c => <ChannelSection channel={c} key={c._id} />)
                         }
                     </div>
                 </div>
