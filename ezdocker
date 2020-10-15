@@ -1,9 +1,9 @@
 #!/bin/bash
 
 if [[ "$*" == *"--deploy"* ]]; then
-    CLIENT_DOCKERFILE=Dockerfile
-elif [ "$*" = *"--develop"* ]; then
-    CLIENT_DOCKERFILE=Dockerfile-dev
+    DOCKERFILE=Dockerfile
+elif [[ "$*" == *"--develop"* ]]; then
+    DOCKERFILE=Dockerfile-dev
 fi
 
 params=()
@@ -16,4 +16,4 @@ if [[ "$*" == *"--client"* ]]; then
     params+=(feed-client)
 fi
 
-docker-compose up --build --force-recreate "${params[@]}"
+CLIENT_DOCKERFILE=$DOCKERFILE docker-compose up --build --force-recreate "${params[@]}"
