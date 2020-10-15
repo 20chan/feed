@@ -2,4 +2,4 @@
 
 feed aggregator, **WIP**
 
-![preview](imgs/preview.png)
+![preview](img/preview.png)
