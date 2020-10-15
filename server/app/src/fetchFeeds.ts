@@ -2,11 +2,13 @@ import { FeedChannel, FeedItem, IFeedChannel, IFeedItem, ISubscribe } from "./en
 import { findFeedChannel, findFeedItem, insertFeedChannel, insertFeedItem, updateFeedChannel, updateFeedItem } from "./feed";
 import { fetchFeed } from "./river";
 
-const getUpdatedChannel = async (subscribe: string, feed: IFeedChannel): Promise<FeedChannel> => {
-    const channel = await findFeedChannel(subscribe);
+const getUpdatedChannel = async (subscribe: ISubscribe, feed: IFeedChannel): Promise<FeedChannel> => {
+    const id = subscribe._id?.toString() || "";
+    const channel = await findFeedChannel(id);
     if (channel === null) {
         const update: FeedChannel = {
-            subscribe,
+            subscribe: id,
+            name: subscribe.name,
             title: feed.title,
             description: feed.description,
             link: feed.link,
@@ -19,11 +21,12 @@ const getUpdatedChannel = async (subscribe: string, feed: IFeedChannel): Promise
     } else {
         const update: FeedChannel = {
             ...channel,
+            name: subscribe.name,
             title: feed.title,
             description: feed.description,
             link: feed.link,
         };
-        if (channel.title !== feed.title || channel.description !== feed.description || channel.link !== feed.link) {
+        if (channel.title !== feed.title || channel.description !== feed.description || channel.link !== feed.link || channel.name !== subscribe.name) {
             await updateFeedChannel(update);
         }
         return update;
@@ -61,12 +64,11 @@ const updateChannelItem = async (channel: string, feed: IFeedItem): Promise<Feed
 };
 
 export const fetchChannel = async (subscribe: ISubscribe) => {
-    const subsId = subscribe._id?.toString() || "";
     const feed = await fetchFeed(subscribe.type, subscribe.url);
     if (feed === null || feed.items === undefined) {
         throw new Error("fetch failed");
     }
-    const channel = await getUpdatedChannel(subsId, feed);
+    const channel = await getUpdatedChannel(subscribe, feed);
     await Promise.all(feed.items.map(async (item) => {
         await updateChannelItem(channel._id?.toString()!, item);
     }));

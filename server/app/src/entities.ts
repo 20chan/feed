@@ -17,6 +17,7 @@ export interface IFeedItem {
 export interface FeedChannel {
     _id?: ObjectId;
     subscribe: string;
+    name: string;
     title: string;
     description: string;
     link: string;
@@ -33,4 +34,5 @@ export interface ISubscribe {
     _id?: ObjectId;
     type: string;
     url: string;
+    name: string;
 }
