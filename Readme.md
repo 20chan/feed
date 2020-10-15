@@ -1,3 +1,5 @@
 # feed
 
-feed aggregator
+feed aggregator, **WIP**
+
+![preview](imgs/preview.png)
