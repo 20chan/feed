@@ -1,5 +1,15 @@
 .channel-items {
     list-style-type: none;
+    padding-inline-start: 0;
+}
+
+.channel-item {
+    margin: 1px;
+    padding: 3px 0 3px 0;
+}
+
+.channel-item-link {
+    width: 100%;
 }
 
 .channel-item-link:any-link {
@@ -15,4 +25,5 @@
 .channel-item-link:hover {
     color: var(--dark-white);
     text-decoration: underline;
+    padding-left: 10px;
 }
