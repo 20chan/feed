@@ -63,7 +63,7 @@ const updateChannelItem = async (channel: string, feed: IFeedItem): Promise<Feed
 export const fetchChannel = async (subscribe: ISubscribe) => {
     const subsId = subscribe._id?.toString() || "";
     const feed = await fetchFeed(subscribe.type, subscribe.url);
-    if (feed === null) {
+    if (feed === null || feed.items === undefined) {
         throw new Error("fetch failed");
     }
     const channel = await getUpdatedChannel(subsId, feed);
