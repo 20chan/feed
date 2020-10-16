@@ -12,13 +12,13 @@ export const ChannelSection = ({ channel }: { channel: IFeedChannel}) => {
     return (
         <section className="channel-section">
             <div className="channel-content">
-                <h1 className="channel-header">
-                    {channel.config.name}
+                <div className="channel-header">
+                    <h1 className="channel-title">{channel.config.name}</h1>
                     <div className="channel-header-corner">
                         <button className="channel-display-button channel-display-less-button" onClick={() => addDisplayCount(-10)}>-10</button>
                         <button className="channel-display-button channel-display-more-button" onClick={() => addDisplayCount(+10)}>+10</button>
                     </div>
-                </h1>
+                </div>
                 <ol className="channel-items">
                 {
                     channel.items.map((item, i) =>
