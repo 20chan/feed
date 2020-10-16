@@ -42,7 +42,7 @@ route.get("/:id/items", async (req, resp) => {
             resp.end();
             return;
         }
-        const items = mapChannelItems(channel.items);
+        const items = await mapChannelItems(channel.items);
         resp.json(items);
     } catch (err) {
         resp.status(500);
@@ -50,7 +50,6 @@ route.get("/:id/items", async (req, resp) => {
         console.error(`error on feeds.feeds.get /${id}/items/`, err);
     }
 });
-
 
 route.post("/", async (req, resp) => {
     try {

@@ -63,5 +63,5 @@ export const deleteAllChannelItemsInChannel = (channel: string) => {
 };
 
 export const mapChannelItems = (ids: string[]) => {
-    return getChannelItems().find({_id: { $in: ids.map(i => new mongo.ObjectID(i)) }}).toArray();
+    return getChannelItems().find({"_id": { $in: ids.map(i => new mongo.ObjectID(i)) }}).toArray();
 };
