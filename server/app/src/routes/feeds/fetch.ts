@@ -4,8 +4,11 @@ import { FetchJob } from "../../jobs/fetchJob";
 const route = express.Router();
 const job = new FetchJob(5 * 60 * 1000);
 
-route.get("/interval", (req, resp) => {
-    resp.json({interval: job.interval});
+route.get("/", (req, resp) => {
+    resp.json({
+        interval: job.interval,
+        last: job.last,
+    });
 });
 
 route.post("/", async (req, resp) => {
