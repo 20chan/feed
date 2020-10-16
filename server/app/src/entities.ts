@@ -30,9 +30,19 @@ export interface ChannelItem extends IChannelItem {
     updated: boolean;
 }
 
+export interface IFeedChannelConfig {
+    name: string;
+    index: number;
+}
+
+export interface IFeedChannel {
+    _id?: ObjectId;
+    config: IFeedChannelConfig;
+    items: string[];
+}
+
 export interface ISubscribe {
     _id?: ObjectId;
     type: string;
     url: string;
-    name: string;
 }

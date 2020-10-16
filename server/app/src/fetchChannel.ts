@@ -1,5 +1,5 @@
 import { Channel, ChannelItem, IChannel, IChannelItem, ISubscribe } from "./entities";
-import { findChannel, findChannelItem, insertChannel, insertChannelItem, updateChannel, updateChannelItem } from "./feed";
+import { findChannel, findChannelItem, insertChannel, insertChannelItem, updateChannel, updateChannelItem } from "./channels";
 import { fetchFeed } from "./river";
 
 const getUpdatedChannel = async (subscribe: ISubscribe, feed: IChannel): Promise<Channel> => {

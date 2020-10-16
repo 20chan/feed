@@ -1,7 +1,7 @@
 import * as express from "express";
 import { ObjectId } from "../../db";
 import { ChannelItem } from "../../entities";
-import * as db from "../../feed";
+import * as db from "../../channels";
 
 const route = express.Router();
 
