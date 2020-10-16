@@ -1,4 +1,5 @@
 import * as express from "express";
+import { mapChannelItems } from "../../channels";
 import { ObjectId } from "../../db";
 import { IFeedChannel } from "../../entities";
 import * as db from "../../feeds";
@@ -12,7 +13,7 @@ route.get("/", async (req, resp) => {
     } catch (err) {
         resp.status(500);
         resp.end();
-        console.error("error on feeds.channels.get /", err);
+        console.error("error on feeds.feeds.get /", err);
     }
 });
 
@@ -31,6 +32,25 @@ route.get("/:id", async (req, resp) => {
         resp.end();
     }
 });
+
+route.get("/:id/items", async (req, resp) => {
+    const id = req.params.id;
+    try {
+        const channel = await db.getFeedChannel(new ObjectId(id));
+        if (channel === null) {
+            resp.status(404);
+            resp.end();
+            return;
+        }
+        const items = mapChannelItems(channel.items);
+        resp.json(items);
+    } catch (err) {
+        resp.status(500);
+        resp.end();
+        console.error(`error on feeds.feeds.get /${id}/items/`, err);
+    }
+});
+
 
 route.post("/", async (req, resp) => {
     try {
