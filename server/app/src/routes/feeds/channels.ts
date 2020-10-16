@@ -60,6 +60,19 @@ route.get("/:id/items/:itemId", async (req, resp) => {
     }
 });
 
+route.delete("/all/items/all", async (req, resp) => {
+    const id = req.params.id;
+    try {
+        const items = await db.getAllChannels();
+        await Promise.all(items.map(c => db.deleteAllChannelItemsInChannel(c._id!.toString())));
+        resp.status(200);
+        resp.end();
+    } catch {
+        resp.status(400);
+        resp.end();
+    }
+});
+
 route.delete("/:id/items/all", async (req, resp) => {
     const id = req.params.id;
     try {

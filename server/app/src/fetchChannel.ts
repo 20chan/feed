@@ -91,15 +91,20 @@ const fetchSubscribe = async (subscribe: ISubscribe) => {
     }
     const channelUpdated = await getUpdatedChannel(subscribe, channel);
     const feeds = await findFeedChannelSubscribes(channelUpdated._id!.toString());
-    await Promise.all(channel.items.map(async (item) => {
+    const feedUpdates = await Promise.all(channel.items.map(async (item) => {
         const result = await getUpdatedChannelItem(channelUpdated._id!.toString(), item);
-        feeds.forEach(f => {
-            const needAppend = result.new || !result.item.read || result.updated && f.config.updates;
-            if (needAppend) {
-                f.items.push(result.item._id!.toString());
-            }
-        });
+        return {
+            id: result.item._id!.toString(),
+            feeds: feeds.filter(f => {
+                const needAppend = result.new || !result.item.read || result.updated && f.config.updates;
+                return needAppend;
+            })
+        };
     }));
+
+    for (const u of feedUpdates) {
+        u.feeds.forEach(f => f.items.push(u.id));
+    }
 
     await Promise.all(feeds.map(updateFeedChannel));
 };
