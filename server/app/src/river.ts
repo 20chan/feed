@@ -1,5 +1,5 @@
 import fetch from "node-fetch";
-import { IFeedChannel } from "./entities";
+import { IChannel } from "./entities";
 
 const RIVER_ADDR = process.env.RIVER_ADDR || "localhost:8080";
 
@@ -14,7 +14,7 @@ export const getFeedTypes = async (): Promise<string[] | null> => {
     }
 };
 
-export const fetchFeed = async (type: string, url: string): Promise<IFeedChannel | null> => {
+export const fetchFeed = async (type: string, url: string): Promise<IChannel | null> => {
     try {
         const resp = await fetch(`${FEEDS_URL}/${type}?url=${url}`);
         return await resp.json();

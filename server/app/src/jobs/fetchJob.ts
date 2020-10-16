@@ -1,4 +1,4 @@
-import { fetchChannel } from "../fetchFeeds";
+import { fetchChannel } from "../fetchChannel";
 import { getAllSubscribes } from "../subscribes";
 
 export class FetchJob {

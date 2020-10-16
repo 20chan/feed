@@ -1,20 +1,20 @@
 import { ObjectId } from "mongodb";
 
-export interface IFeedChannel {
+export interface IChannel {
     title: string;
     description: string;
     link: string;
-    items: IFeedItem[];
+    items: IChannelItem[];
 }
 
-export interface IFeedItem {
+export interface IChannelItem {
     title: string;
     description: string;
     link: string;
     guid: string;
 }
 
-export interface FeedChannel {
+export interface Channel {
     _id?: ObjectId;
     subscribe: string;
     name: string;
@@ -23,7 +23,7 @@ export interface FeedChannel {
     link: string;
 }
 
-export interface FeedItem extends IFeedItem {
+export interface ChannelItem extends IChannelItem {
     _id?: ObjectId;
     channel: string;
     read: boolean;

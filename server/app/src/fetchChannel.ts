@@ -1,12 +1,12 @@
-import { FeedChannel, FeedItem, IFeedChannel, IFeedItem, ISubscribe } from "./entities";
+import { Channel, ChannelItem, IChannel, IChannelItem, ISubscribe } from "./entities";
 import { findFeedChannel, findFeedItem, insertFeedChannel, insertFeedItem, updateFeedChannel, updateFeedItem } from "./feed";
 import { fetchFeed } from "./river";
 
-const getUpdatedChannel = async (subscribe: ISubscribe, feed: IFeedChannel): Promise<FeedChannel> => {
+const getUpdatedChannel = async (subscribe: ISubscribe, feed: IChannel): Promise<Channel> => {
     const id = subscribe._id?.toString() || "";
     const channel = await findFeedChannel(id);
     if (channel === null) {
-        const update: FeedChannel = {
+        const update: Channel = {
             subscribe: id,
             name: subscribe.name,
             title: feed.title,
@@ -19,7 +19,7 @@ const getUpdatedChannel = async (subscribe: ISubscribe, feed: IFeedChannel): Pro
             _id: insert.insertedId,
         };
     } else {
-        const update: FeedChannel = {
+        const update: Channel = {
             ...channel,
             name: subscribe.name,
             title: feed.title,
@@ -33,10 +33,10 @@ const getUpdatedChannel = async (subscribe: ISubscribe, feed: IFeedChannel): Pro
     }
 };
 
-const updateChannelItem = async (channel: string, feed: IFeedItem): Promise<FeedItem> => {
+const updateChannelItem = async (channel: string, feed: IChannelItem): Promise<ChannelItem> => {
     const item = await findFeedItem(feed.guid);
     if (item === null) {
-        const update: FeedItem = {
+        const update: ChannelItem = {
             channel,
             read: false,
             updated: true,
@@ -49,7 +49,7 @@ const updateChannelItem = async (channel: string, feed: IFeedItem): Promise<Feed
         };
     } else {
         const changed = feed.title !== item.title || feed.description !== item.description || feed.link !== item.link;
-        const update: FeedItem = {
+        const update: ChannelItem = {
             ...item,
             title: feed.title,
             description: feed.description,

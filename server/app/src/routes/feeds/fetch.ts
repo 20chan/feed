@@ -1,5 +1,5 @@
 import * as express from "express";
-import { fetchChannel } from "../../fetchFeeds";
+import { fetchChannel } from "../../fetchChannel";
 import { FetchJob } from "../../jobs/fetchJob";
 import { getSubscribe } from "../../subscribes";
 

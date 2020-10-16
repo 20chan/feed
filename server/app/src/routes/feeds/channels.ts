@@ -1,6 +1,6 @@
 import * as express from "express";
 import { ObjectId } from "../../db";
-import { FeedItem } from "../../entities";
+import { ChannelItem } from "../../entities";
 import * as db from "../../feed";
 
 const route = express.Router();
@@ -92,7 +92,7 @@ route.post("/:id/items/:itemId/read", async (req, resp) => {
             resp.status(404);
             resp.end();
         } else {
-            const update: FeedItem = {
+            const update: ChannelItem = {
                 ...item,
                 read: true,
                 updated: false,

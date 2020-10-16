@@ -1,13 +1,13 @@
 import * as mongo from "mongodb";
 import { DB } from "./db";
-import { IFeedChannel, IFeedItem, FeedChannel, FeedItem } from "./entities";
+import { IChannel, IChannelItem, Channel, ChannelItem } from "./entities";
 
 const getFeedChannels = () => {
-    return DB.client.db("feed").collection<FeedChannel>("channels");
+    return DB.client.db("feed").collection<Channel>("channels");
 };
 
 const getFeedItems = () => {
-    return DB.client.db("feed").collection<FeedItem>("feeds");
+    return DB.client.db("feed").collection<ChannelItem>("feeds");
 };
 
 export const getAllFeedChannels = () => {
@@ -22,11 +22,11 @@ export const findFeedChannel = (subscribe: string) => {
     return getFeedChannels().findOne({"subscribe": subscribe});
 };
 
-export const insertFeedChannel = (item: FeedChannel) => {
+export const insertFeedChannel = (item: Channel) => {
     return getFeedChannels().insertOne(item);
 };
 
-export const updateFeedChannel = (item: FeedChannel) => {
+export const updateFeedChannel = (item: Channel) => {
     return getFeedChannels().updateOne({"_id": item._id}, { $set: item });
 };
 
@@ -46,11 +46,11 @@ export const findFeedItem = (guid: string) => {
     return getFeedItems().findOne({"guid": guid});
 };
 
-export const insertFeedItem = (item: FeedItem) => {
+export const insertFeedItem = (item: ChannelItem) => {
     return getFeedItems().insertOne(item);
 };
 
-export const updateFeedItem = (item: FeedItem) => {
+export const updateFeedItem = (item: ChannelItem) => {
     return getFeedItems().updateOne({"_id": item._id}, { $set: item });
 };
 
