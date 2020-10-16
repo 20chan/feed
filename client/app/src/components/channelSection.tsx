@@ -6,7 +6,7 @@ export const ChannelSection = ({ channel }: { channel: IFeedChannel}) => {
     const [displayCount, setDisplayCount] = useState<number>(10);
 
     const addDisplayCount = (offset: number) => {
-        setDisplayCount(Math.min(Math.max(displayCount + offset, 0), channel.items.length - 1));
+        setDisplayCount(Math.min(Math.max(displayCount + offset, 0), channel.items.length));
     };
 
     return (
