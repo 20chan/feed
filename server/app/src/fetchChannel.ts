@@ -1,10 +1,10 @@
 import { Channel, ChannelItem, IChannel, IChannelItem, ISubscribe } from "./entities";
-import { findFeedChannel, findFeedItem, insertFeedChannel, insertFeedItem, updateFeedChannel, updateFeedItem } from "./feed";
+import { findChannel, findChannelItem, insertChannel, insertChannelItem, updateChannel, updateChannelItem } from "./feed";
 import { fetchFeed } from "./river";
 
 const getUpdatedChannel = async (subscribe: ISubscribe, feed: IChannel): Promise<Channel> => {
     const id = subscribe._id?.toString() || "";
-    const channel = await findFeedChannel(id);
+    const channel = await findChannel(id);
     if (channel === null) {
         const update: Channel = {
             subscribe: id,
@@ -13,7 +13,7 @@ const getUpdatedChannel = async (subscribe: ISubscribe, feed: IChannel): Promise
             description: feed.description,
             link: feed.link,
         };
-        const insert = await insertFeedChannel(update);
+        const insert = await insertChannel(update);
         return {
             ...update,
             _id: insert.insertedId,
@@ -27,14 +27,14 @@ const getUpdatedChannel = async (subscribe: ISubscribe, feed: IChannel): Promise
             link: feed.link,
         };
         if (channel.title !== feed.title || channel.description !== feed.description || channel.link !== feed.link || channel.name !== subscribe.name) {
-            await updateFeedChannel(update);
+            await updateChannel(update);
         }
         return update;
     }
 };
 
 const updateChannelItem = async (channel: string, feed: IChannelItem): Promise<ChannelItem> => {
-    const item = await findFeedItem(feed.guid);
+    const item = await findChannelItem(feed.guid);
     if (item === null) {
         const update: ChannelItem = {
             channel,
@@ -42,7 +42,7 @@ const updateChannelItem = async (channel: string, feed: IChannelItem): Promise<C
             updated: true,
             ...feed,
         };
-        const insert = await insertFeedItem(update);
+        const insert = await insertChannelItem(update);
         return {
             ...update,
             _id: insert.insertedId,
@@ -57,7 +57,7 @@ const updateChannelItem = async (channel: string, feed: IChannelItem): Promise<C
             updated: changed,
         };
         if (changed) {
-            await updateFeedItem(update);
+            await updateChannelItem(update);
         }
         return update;
     }

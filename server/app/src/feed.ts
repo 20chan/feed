@@ -2,62 +2,62 @@ import * as mongo from "mongodb";
 import { DB } from "./db";
 import { IChannel, IChannelItem, Channel, ChannelItem } from "./entities";
 
-const getFeedChannels = () => {
+const getChannels = () => {
     return DB.client.db("feed").collection<Channel>("channels");
 };
 
-const getFeedItems = () => {
+const getChannelItems = () => {
     return DB.client.db("feed").collection<ChannelItem>("feeds");
 };
 
-export const getAllFeedChannels = () => {
-    return getFeedChannels().find().toArray();
+export const getAllChannels = () => {
+    return getChannels().find().toArray();
 };
 
-export const getFeedChannel = (_id: mongo.ObjectId) => {
-    return getFeedChannels().findOne({_id});
+export const getChannel = (_id: mongo.ObjectId) => {
+    return getChannels().findOne({_id});
 };
 
-export const findFeedChannel = (subscribe: string) => {
-    return getFeedChannels().findOne({"subscribe": subscribe});
+export const findChannel = (subscribe: string) => {
+    return getChannels().findOne({"subscribe": subscribe});
 };
 
-export const insertFeedChannel = (item: Channel) => {
-    return getFeedChannels().insertOne(item);
+export const insertChannel = (item: Channel) => {
+    return getChannels().insertOne(item);
 };
 
-export const updateFeedChannel = (item: Channel) => {
-    return getFeedChannels().updateOne({"_id": item._id}, { $set: item });
+export const updateChannel = (item: Channel) => {
+    return getChannels().updateOne({"_id": item._id}, { $set: item });
 };
 
-export const deleteFeedChannel = (_id: mongo.ObjectId) => {
-    return getFeedChannels().deleteOne({_id});
+export const deleteChannel = (_id: mongo.ObjectId) => {
+    return getChannels().deleteOne({_id});
 };
 
-export const getAllFeedItems = (channel: string) => {
-    return getFeedItems().find({"channel": channel}).toArray();
+export const getAllChannelItems = (channel: string) => {
+    return getChannelItems().find({"channel": channel}).toArray();
 };
 
-export const getFeedItem = (_id: mongo.ObjectId) => {
-    return getFeedItems().findOne({_id});
+export const getChannelItem = (_id: mongo.ObjectId) => {
+    return getChannelItems().findOne({_id});
 };
 
-export const findFeedItem = (guid: string) => {
-    return getFeedItems().findOne({"guid": guid});
+export const findChannelItem = (guid: string) => {
+    return getChannelItems().findOne({"guid": guid});
 };
 
-export const insertFeedItem = (item: ChannelItem) => {
-    return getFeedItems().insertOne(item);
+export const insertChannelItem = (item: ChannelItem) => {
+    return getChannelItems().insertOne(item);
 };
 
-export const updateFeedItem = (item: ChannelItem) => {
-    return getFeedItems().updateOne({"_id": item._id}, { $set: item });
+export const updateChannelItem = (item: ChannelItem) => {
+    return getChannelItems().updateOne({"_id": item._id}, { $set: item });
 };
 
-export const deleteFeedItem = (_id: mongo.ObjectId) => {
-    return getFeedItems().deleteOne({_id});
+export const deleteChannelItem = (_id: mongo.ObjectId) => {
+    return getChannelItems().deleteOne({_id});
 };
 
-export const deleteAllFeedItemsInChannel = (channel: string) => {
-    return getFeedItems().deleteMany({"channel": channel});
+export const deleteAllChannelItemsInChannel = (channel: string) => {
+    return getChannelItems().deleteMany({"channel": channel});
 };

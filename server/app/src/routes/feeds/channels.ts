@@ -7,7 +7,7 @@ const route = express.Router();
 
 route.get("/", async (req, resp) => {
     try {
-        const items = await db.getAllFeedChannels();
+        const items = await db.getAllChannels();
         resp.json(items);
     } catch (err) {
         resp.status(500);
@@ -19,7 +19,7 @@ route.get("/", async (req, resp) => {
 route.get("/:id", async (req, resp) => {
     const id = req.params.id;
     try {
-        const item = await db.getFeedChannel(new ObjectId(id));
+        const item = await db.getChannel(new ObjectId(id));
         if (item === null) {
             resp.status(404);
             resp.end();
@@ -35,7 +35,7 @@ route.get("/:id", async (req, resp) => {
 route.get("/:id/items", async (req, resp) => {
     const id = req.params.id;
     try {
-        const item = await db.getAllFeedItems(id);
+        const item = await db.getAllChannelItems(id);
         resp.json(item);
     } catch (err) {
         resp.status(500);
@@ -47,7 +47,7 @@ route.get("/:id/items", async (req, resp) => {
 route.get("/:id/items/:itemId", async (req, resp) => {
     const itemId = req.params.itemId;
     try {
-        const item = await db.getFeedItem(new ObjectId(itemId));
+        const item = await db.getChannelItem(new ObjectId(itemId));
         if (item === null) {
             resp.status(404);
             resp.end();
@@ -63,7 +63,7 @@ route.get("/:id/items/:itemId", async (req, resp) => {
 route.delete("/:id/items/all", async (req, resp) => {
     const id = req.params.id;
     try {
-        await db.deleteAllFeedItemsInChannel(id);
+        await db.deleteAllChannelItemsInChannel(id);
         resp.status(200);
         resp.end();
     } catch {
@@ -75,7 +75,7 @@ route.delete("/:id/items/all", async (req, resp) => {
 route.delete("/:id/items/:itemId", async (req, resp) => {
     const itemId = req.params.itemId;
     try {
-        await db.deleteFeedItem(new ObjectId(itemId));
+        await db.deleteChannelItem(new ObjectId(itemId));
         resp.status(200);
         resp.end();
     } catch {
@@ -87,7 +87,7 @@ route.delete("/:id/items/:itemId", async (req, resp) => {
 route.post("/:id/items/:itemId/read", async (req, resp) => {
     const itemId = req.params.itemId;
     try {
-        const item = await db.getFeedItem(new ObjectId(itemId));
+        const item = await db.getChannelItem(new ObjectId(itemId));
         if (item === null) {
             resp.status(404);
             resp.end();
@@ -97,7 +97,7 @@ route.post("/:id/items/:itemId/read", async (req, resp) => {
                 read: true,
                 updated: false,
             };
-            await db.updateFeedItem(update);
+            await db.updateChannelItem(update);
             resp.json(update);
         }
     } catch {
