@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
-import { IFeedChannel, FeedChannel, IFeedItem } from "./entities";
+import { IFeedChannel, IFeedChannelConfig, IFeedItem } from "./entities";
 import "./dashboard.css";
 import { ChannelSection } from "./components/channelSection";
 
 const DashboardPage: React.FunctionComponent<RouteComponentProps> = ({ history }) => {
     const [auth, setAuth] = useState<boolean>(false);
-    const [channels, setChannels] = useState<FeedChannel[]>([]);
+    const [channels, setChannels] = useState<IFeedChannel[]>([]);
 
     useEffect(() => {
         fetchChannels().then(() => {
@@ -15,7 +15,7 @@ const DashboardPage: React.FunctionComponent<RouteComponentProps> = ({ history }
     }, []);
 
     const fetchChannels = async () => {
-        const channelsResp = await fetch("/api/feed/channels");
+        const channelsResp = await fetch("/api/feed/feeds");
         if (!channelsResp.ok) {
             history.push("/login");
             return;
@@ -23,13 +23,13 @@ const DashboardPage: React.FunctionComponent<RouteComponentProps> = ({ history }
         const fetchedChannels: IFeedChannel[] = await channelsResp.json();
         const channesWithItems = await Promise.all(fetchedChannels.map(async c => ({
                 ...c,
-                items: await (await fetchItem(c._id!)).reverse(),
+                items: (await fetchItem(c._id!)).reverse(),
         })));
         setChannels(channesWithItems);
     };
 
     const fetchItem = async (id: string): Promise<IFeedItem[]> => {
-        const resp = await fetch(`/api/feed/channels/${id}/items`);
+        const resp = await fetch(`/api/feed/feeds/${id}/items`);
         if (!resp.ok) {
             throw new Error(`fetch item ${id} failed`);
         }

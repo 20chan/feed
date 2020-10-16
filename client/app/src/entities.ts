@@ -1,13 +1,14 @@
-export interface IFeedChannel {
-    _id?: string;
-    subscribe: string;
+export interface IFeedChannelConfig {
     name: string;
-    title: string;
-    description: string;
-    link: string;
+    index: number;
+    channels: string[];
+    stack: boolean;
+    updates: boolean;
 }
 
-export interface FeedChannel extends IFeedChannel {
+export interface IFeedChannel {
+    _id?: string;
+    config: IFeedChannelConfig;
     items: IFeedItem[];
 }
 

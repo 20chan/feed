@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { FeedChannel } from "./../entities";
+import { IFeedChannel } from "./../entities";
 import "./channelSection.css";
 
-export const ChannelSection = ({ channel }: { channel: FeedChannel}) => {
+export const ChannelSection = ({ channel }: { channel: IFeedChannel}) => {
     const [displayCount, setDisplayCount] = useState<number>(10);
 
     const addDisplayCount = (offset: number) => {
@@ -13,7 +13,7 @@ export const ChannelSection = ({ channel }: { channel: FeedChannel}) => {
         <section className="channel-section">
             <div className="channel-content">
                 <h1 className="channel-header">
-                    <a className="channel-title" href={channel.link}>{channel.name}</a>
+                    {channel.config.name}
                     <div className="channel-header-corner">
                         <button className="channel-display-button channel-display-less-button" onClick={() => addDisplayCount(-10)}>-10</button>
                         <button className="channel-display-button channel-display-more-button" onClick={() => addDisplayCount(+10)}>+10</button>
