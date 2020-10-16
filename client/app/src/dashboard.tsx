@@ -23,7 +23,7 @@ const DashboardPage: React.FunctionComponent<RouteComponentProps> = ({ history }
         const fetchedChannels: IFeedChannel[] = await channelsResp.json();
         const channesWithItems = await Promise.all(fetchedChannels.map(async c => ({
                 ...c,
-                items: (await fetchItem(c._id!)).reverse(),
+                items: (await fetchItem(c._id!)),
         })));
         setChannels(channesWithItems);
     };
