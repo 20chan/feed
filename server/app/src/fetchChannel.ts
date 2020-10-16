@@ -1,6 +1,15 @@
 import { Channel, ChannelItem, IChannel, IChannelItem, ISubscribe } from "./entities";
 import { findChannel, findChannelItem, insertChannel, insertChannelItem, updateChannel, updateChannelItem } from "./channels";
-import { fetchFeed } from "./river";
+import { fetchChannel } from "./river";
+import { clearFeedChannelItems, findFeedChannelSubscribes, getAllFeedChannels, updateFeedChannel } from "./feeds";
+import { getAllSubscribes } from "./subscribes";
+import { response } from "express";
+
+type ChannelItemUpdateResult = {
+    new: boolean;
+    updated: boolean;
+    item: ChannelItem;
+};
 
 const getUpdatedChannel = async (subscribe: ISubscribe, feed: IChannel): Promise<Channel> => {
     const id = subscribe._id?.toString() || "";
@@ -8,7 +17,6 @@ const getUpdatedChannel = async (subscribe: ISubscribe, feed: IChannel): Promise
     if (channel === null) {
         const update: Channel = {
             subscribe: id,
-            name: subscribe.name,
             title: feed.title,
             description: feed.description,
             link: feed.link,
@@ -21,19 +29,18 @@ const getUpdatedChannel = async (subscribe: ISubscribe, feed: IChannel): Promise
     } else {
         const update: Channel = {
             ...channel,
-            name: subscribe.name,
             title: feed.title,
             description: feed.description,
             link: feed.link,
         };
-        if (channel.title !== feed.title || channel.description !== feed.description || channel.link !== feed.link || channel.name !== subscribe.name) {
+        if (channel.title !== feed.title || channel.description !== feed.description || channel.link !== feed.link) {
             await updateChannel(update);
         }
         return update;
     }
 };
 
-const updateChannelItem = async (channel: string, feed: IChannelItem): Promise<ChannelItem> => {
+const getUpdatedChannelItem = async (channel: string, feed: IChannelItem): Promise<ChannelItemUpdateResult> => {
     const item = await findChannelItem(feed.guid);
     if (item === null) {
         const update: ChannelItem = {
@@ -44,9 +51,12 @@ const updateChannelItem = async (channel: string, feed: IChannelItem): Promise<C
         };
         const insert = await insertChannelItem(update);
         return {
+            new: true,
+            updated: true,
+            item: {
             ...update,
             _id: insert.insertedId,
-        };
+        }};
     } else {
         const changed = feed.title !== item.title || feed.description !== item.description || feed.link !== item.link;
         const update: ChannelItem = {
@@ -59,17 +69,46 @@ const updateChannelItem = async (channel: string, feed: IChannelItem): Promise<C
         if (changed) {
             await updateChannelItem(update);
         }
-        return update;
+        return {
+            new: false,
+            updated: changed,
+            item: update,
+        };
     }
 };
 
-export const fetchChannel = async (subscribe: ISubscribe) => {
-    const feed = await fetchFeed(subscribe.type, subscribe.url);
-    if (feed === null || feed.items === undefined) {
+export const fetchSubscribes = async () => {
+    const subscribes = await getAllSubscribes();
+
+    await prepareFeedChannels();
+    await Promise.all(subscribes.map(fetchSubscribe));
+};
+
+const fetchSubscribe = async (subscribe: ISubscribe) => {
+    const channel = await fetchChannel(subscribe.type, subscribe.url);
+    if (channel === null || channel.items === undefined) {
         throw new Error("fetch failed");
     }
-    const channel = await getUpdatedChannel(subscribe, feed);
-    await Promise.all(feed.items.map(async (item) => {
-        await updateChannelItem(channel._id?.toString()!, item);
+    const channelUpdated = await getUpdatedChannel(subscribe, channel);
+    const feeds = await findFeedChannelSubscribes(channelUpdated._id!.toString());
+    await Promise.all(channel.items.map(async (item) => {
+        const result = await getUpdatedChannelItem(channelUpdated._id!.toString(), item);
+        feeds.forEach(f => {
+            const needAppend = result.new || !result.item.read || result.updated && f.config.updates;
+            if (needAppend) {
+                f.items.push(result.item._id!.toString());
+            }
+        });
     }));
+
+    await Promise.all(feeds.map(updateFeedChannel));
+};
+
+const prepareFeedChannels = async () => {
+    const feedChannels = await getAllFeedChannels();
+    feedChannels.map(async c => {
+        if (!c.config.stack) {
+            await clearFeedChannelItems(c._id!);
+        }
+    });
 };

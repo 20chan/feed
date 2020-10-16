@@ -17,7 +17,6 @@ export interface IChannelItem {
 export interface Channel {
     _id?: ObjectId;
     subscribe: string;
-    name: string;
     title: string;
     description: string;
     link: string;
@@ -33,6 +32,9 @@ export interface ChannelItem extends IChannelItem {
 export interface IFeedChannelConfig {
     name: string;
     index: number;
+    channels: string[];
+    stack: boolean;
+    updates: boolean;
 }
 
 export interface IFeedChannel {

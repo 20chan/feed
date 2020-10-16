@@ -1,5 +1,4 @@
-import { fetchChannel } from "../fetchChannel";
-import { getAllSubscribes } from "../subscribes";
+import { fetchSubscribes } from "../fetchChannel";
 
 export class FetchJob {
     public interval: number;
@@ -17,8 +16,7 @@ export class FetchJob {
     }
 
     public check = async () => {
-        const subscribes = await getAllSubscribes();
-        await Promise.all(subscribes.map(async subs => await fetchChannel(subs)));
+        await fetchSubscribes();
         this.last = new Date();
     }
 }

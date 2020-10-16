@@ -5,7 +5,7 @@ const RIVER_ADDR = process.env.RIVER_ADDR || "localhost:8080";
 
 const FEEDS_URL = `${RIVER_ADDR}/api/feeds`;
 
-export const getFeedTypes = async (): Promise<string[] | null> => {
+export const getChannelTypes = async (): Promise<string[] | null> => {
     try {
         const resp = await fetch(FEEDS_URL);
         return await resp.json();
@@ -14,7 +14,7 @@ export const getFeedTypes = async (): Promise<string[] | null> => {
     }
 };
 
-export const fetchFeed = async (type: string, url: string): Promise<IChannel | null> => {
+export const fetchChannel = async (type: string, url: string): Promise<IChannel | null> => {
     try {
         const resp = await fetch(`${FEEDS_URL}/${type}?url=${url}`);
         return await resp.json();
