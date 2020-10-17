@@ -3,6 +3,7 @@ import { withRouter, RouteComponentProps } from "react-router-dom";
 import { IFeedChannel, IFeedChannelConfig, IFeedItem } from "../entities";
 import "./dashboard.css";
 import { ChannelSection } from "../components/channelSection";
+import { SubscribesPopup } from "../components/subscribesPopup";
 
 const DashboardPage: React.FunctionComponent<RouteComponentProps> = ({ history }) => {
     const [auth, setAuth] = useState<boolean>(false);
@@ -67,6 +68,9 @@ const DashboardPage: React.FunctionComponent<RouteComponentProps> = ({ history }
                         {
                             channels.map(c => <ChannelSection channel={c} key={c._id} />)
                         }
+                    </div>
+                    <div>
+                        <SubscribesPopup />
                     </div>
                 </div>
             </div>
