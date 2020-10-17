@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
-import { IFeedChannel, IFeedChannelConfig, IFeedItem } from "./entities";
+import { IFeedChannel, IFeedChannelConfig, IFeedItem } from "../entities";
 import "./dashboard.css";
-import { ChannelSection } from "./components/channelSection";
+import { ChannelSection } from "../components/channelSection";
 
 const DashboardPage: React.FunctionComponent<RouteComponentProps> = ({ history }) => {
     const [auth, setAuth] = useState<boolean>(false);
