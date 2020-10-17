@@ -2,7 +2,7 @@ import * as React from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import "./login.css";
 
-const LoginPage: React.SFC<RouteComponentProps> = ({ history }) => {
+const LoginPage: React.FunctionComponent<RouteComponentProps> = ({ history }) => {
     const [id, setId] = React.useState<string>("");
     const [password, setPassword] = React.useState<string>("");
 
