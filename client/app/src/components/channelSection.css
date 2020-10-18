@@ -42,7 +42,7 @@
 
 .channel-item-link:any-link {
     transition: all .1s ease;
-    color: #b0b2b6;
+    color: var(--text-white);
     text-decoration: none;
 }
 

@@ -45,6 +45,9 @@ export const SubscribesPopup = ({ show, setShow }: Props) => {
     return (
         <div className={`subscribes-popup ${visibleClass}`}>
             <div className="subscribes-popup-content">
+                <div className="popup-title unselectable">
+                    Subscribes
+                </div>
                 {
                     (!loaded) ? loadingBody : error ? errorBody : contentBody
                 }

@@ -77,13 +77,11 @@ const DashboardPage: React.FunctionComponent<RouteComponentProps> = ({ history }
                             channels.map(c => <ChannelSection channel={c} key={c._id} />)
                         }
                     </div>
-                    <div>
-                        {
-                            <SubscribesPopup show={subscribesVisible} setShow={setSubscribesVisible} />
-                        }
-                    </div>
                 </div>
             </div>
+            {
+                <SubscribesPopup show={subscribesVisible} setShow={setSubscribesVisible} />
+            }
         </div>
     );
 };

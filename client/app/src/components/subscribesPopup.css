@@ -1,7 +1,24 @@
 .subscribes-popup {
     position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #00000077;
 }
 
 .subscribes-popup.hidden {
     display: none;
+}
+
+.subscribes-popup-content {
+    position: absolute;
+    left: 15vw;
+    right: 15vw;
+    top: 180px;
+
+    padding: 30px;
+
+    background-color: var(--dark-black);
+    color: var(--text-white);
 }

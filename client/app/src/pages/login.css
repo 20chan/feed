@@ -16,6 +16,8 @@
     --light-magenta:#a626a4;
     --light-cyan:#0997b3;
     --light-white:#fafafa;
+
+    --text-white: #b0b2b6;
 }
 
 body {
@@ -41,6 +43,13 @@ body * {
     color: var(--dark-red);
     margin-bottom: 30px;
     font-size: 50px;
+    text-align: center;
+}
+
+.popup-title {
+    color: var(--dark-blue);
+    margin-bottom: 30px;
+    font-size: 30px;
     text-align: center;
 }
 
