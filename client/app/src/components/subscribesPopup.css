@@ -1,3 +1,7 @@
 .subscribes-popup {
     position: fixed;
 }
+
+.subscribes-popup.hidden {
+    display: none;
+}

@@ -8,6 +8,7 @@ import { SubscribesPopup } from "../components/subscribesPopup";
 const DashboardPage: React.FunctionComponent<RouteComponentProps> = ({ history }) => {
     const [auth, setAuth] = useState<boolean>(false);
     const [channels, setChannels] = useState<IFeedChannel[]>([]);
+    const [subscribesVisible, setSubscribesVisible] = useState<boolean>(false);
 
     useEffect(() => {
         fetchChannels().then(() => {
@@ -54,6 +55,13 @@ const DashboardPage: React.FunctionComponent<RouteComponentProps> = ({ history }
             </div>
         );
     }
+
+    document.onkeydown = (ev: KeyboardEvent) => {
+        if (ev.key === "s") {
+            setSubscribesVisible(!subscribesVisible);
+        }
+    };
+
     return (
         <div className="page">
             {/* <button onClick={logout}>logout</button> */}
@@ -70,7 +78,9 @@ const DashboardPage: React.FunctionComponent<RouteComponentProps> = ({ history }
                         }
                     </div>
                     <div>
-                        <SubscribesPopup />
+                        {
+                            <SubscribesPopup show={subscribesVisible} setShow={setSubscribesVisible} />
+                        }
                     </div>
                 </div>
             </div>

@@ -2,7 +2,12 @@ import React, { useEffect, useState } from "react";
 import { ISubscribe } from "./../entities";
 import "./subscribesPopup.css";
 
-export const SubscribesPopup = () => {
+interface Props {
+    show: boolean;
+    setShow: (value: boolean) => void;
+}
+
+export const SubscribesPopup = ({ show, setShow }: Props) => {
     const [subscribes, setSubscribes] = useState<ISubscribe[]>([]);
     const [error, setError] = useState<boolean>(false);
     const [loaded, setLoaded] = useState<boolean>(false);
@@ -22,10 +27,10 @@ export const SubscribesPopup = () => {
         setSubscribes(await resp.json());
     };
 
+    const visibleClass = show ? "show" : "hidden";
+
     const loadingBody = <div className="loading">loading..</div>;
-
     const errorBody = <div className="error">error fetching subscribes</div>;
-
     const contentBody = <div className="subscribes-list">
         {
             subscribes.map(s =>
@@ -38,11 +43,12 @@ export const SubscribesPopup = () => {
     </div>;
 
     return (
-        <div className="subscribes-popup">
+        <div className={`subscribes-popup ${visibleClass}`}>
             <div className="subscribes-popup-content">
                 {
                     (!loaded) ? loadingBody : error ? errorBody : contentBody
                 }
+                <button className="popup-close" onClick={() => setShow(false)}>close</button>
             </div>
         </div>
     );
